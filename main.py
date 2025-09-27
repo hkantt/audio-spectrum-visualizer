@@ -191,12 +191,12 @@ class App:
         if imgui.button("Play"):
             if self.filename:
                 self.stream.play(self.filename, loop=True)
-        if imgui.button("Resume"):
-            if self.stream.is_paused():
-                self.stream.resume()
         if imgui.button("Pause"):
             if self.stream.is_playing():
                 self.stream.pause()
+        if imgui.button("Resume"):
+            if self.stream.is_paused():
+                self.stream.resume()
         if imgui.button("Stop"):
             if self.stream.is_playing():
                 self.stream.stop()
