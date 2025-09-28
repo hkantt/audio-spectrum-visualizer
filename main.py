@@ -103,9 +103,9 @@ class App:
     def load_file(self):
         file_path = filedialog.askopenfilename(
                         title="Select a file",
-                        filetypes=[("Audio files", ["*.mp3"])]
+                        filetypes=[("Audio files", ["*.mp3", ".ogg", ".wav"])]
                         )
-        if file_path:
+        if file_path and not self.filename == str(file_path):
             self.filename = str(file_path)
             self.music_data = self.oal_ctx.decode_file(self.filename)
             self.n_channels = self.music_data.channels
@@ -181,23 +181,23 @@ class App:
 
     def render_ui(self):
         imgui.begin("Playback")
-        if imgui.button("Load"):
+        if imgui.button("Load  "):
             self.stream.pause()
             loaded = self.load_file()
             if loaded :
                 self.stream.stop()
             else:
                 self.stream.resume()
-        if imgui.button("Play"):
+        if imgui.button("Play  "):
             if self.filename:
                 self.stream.play(self.filename, loop=True)
-        if imgui.button("Pause"):
+        if imgui.button("Pause "):
             if self.stream.is_playing():
                 self.stream.pause()
         if imgui.button("Resume"):
             if self.stream.is_paused():
                 self.stream.resume()
-        if imgui.button("Stop"):
+        if imgui.button("Stop  "):
             if self.stream.is_playing():
                 self.stream.stop()
         imgui.end()
